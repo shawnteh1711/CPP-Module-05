@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 17:14:03 by steh              #+#    #+#             */
-/*   Updated: 2022/09/07 23:09:39 by steh             ###   ########.fr       */
+/*   Updated: 2022/09/08 01:13:03 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ class Bureaucrat
 		int				getGrade(void) const;
 		void			incrementGrade(int grade);
 		void			decrementGrade(int grade);
-		void			checkGrade( void ) const;
+		// void			checkGrade( void ) const;
+		void			setGrade(int grade);
 
 		class GradeTooHighException : public exception
 		{
@@ -57,7 +58,7 @@ class Bureaucrat
 					virtual const char* what() const throw();
 		};
 
-		void			signForm(Form const & src);
+		void			signForm(Form & src);
 };
 
 ostream	& operator<<(ostream &o, Bureaucrat const & rhs);

@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 17:16:28 by steh              #+#    #+#             */
-/*   Updated: 2022/09/07 20:29:54 by steh             ###   ########.fr       */
+/*   Updated: 2022/09/08 01:27:44 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ Bureaucrat::Bureaucrat(string name, int grade) : _name(name), _grade(grade)
 {
 	if (Bureaucrat::_verbose)
 		cout << "Bureaucrat parameter constructor" << endl;
-	checkGrade();
+	this->setGrade(grade);
+	cout << *this;
 	return ;
 }
 
@@ -45,7 +46,7 @@ Bureaucrat::Bureaucrat(Bureaucrat const & src)
 
 Bureaucrat & Bureaucrat::operator=(Bureaucrat const & rhs)
 {
-	this->_grade = rhs.getGrade();
+	this->setGrade(rhs.getGrade());
 	return (*this);
 }
 
@@ -78,75 +79,38 @@ int				Bureaucrat::getGrade(void) const
 
 void			Bureaucrat::incrementGrade(int grade)
 {	
-	checkGrade();
-	try
-	{
-		int	cpy;
-		cpy = this->_grade;
-		cpy -= grade;
-		if (cpy > HighestRank)
-		{
-			this->_grade = cpy;
-			cout
-			<< this->_name
-			<< " Bureaucrat, promoted to grade "
-			<< this->_grade
-			<< endl;
-		}
-		else
-			throw Bureaucrat::GradeTooHighException();
-	}
-	catch(Bureaucrat::GradeTooHighException e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	// this->_grade -= grade;
-	// cout
-	// << this->_name
-	// << " Bureaucrat, demoted to grade "
-	// << this->_grade
-	// << endl;
+	int cpygrade;
+
+	cpygrade = this->_grade - grade;
+	this->setGrade(cpygrade);
+	cout << *this;
 }
 
 void			Bureaucrat::decrementGrade(int grade)
 {
-	checkGrade();
-	try
-	{
-		int	cpy;
-		cpy = this->_grade;
-		cpy += grade;
-		if (cpy < LowestRank)
-		{
-			this->_grade = cpy;
-			cout
-			<< this->_name
-			<< " Bureaucrat, demoted to grade "
-			<< this->_grade
-			<< endl;
-		}
-		else
-			throw Bureaucrat::GradeTooLowException();
-	}
-	catch(Bureaucrat::GradeTooLowException e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	// this->_grade += grade;
-	// cout
-	// << this->_name
-	// << " Bureaucrat, promoted to grade "
-	// << this->_grade
-	// << endl;
+	grade += this->_grade;
+	this->setGrade(grade);
+	cout << *this;
 }
 
-void	Bureaucrat::checkGrade( void ) const
+// void	Bureaucrat::checkGrade(void) const
+// {
+// 	if (this->_grade < HighestRank)
+// 		throw Bureaucrat::GradeTooHighException();
+// 	else if (this->_grade > LowestRank)
+// 		throw Bureaucrat::GradeTooLowException();
+// 	return ;
+// }
+
+
+void	Bureaucrat::setGrade(int grade)
 {
-	if (this->_grade < HighestRank)
+	if (grade < HighestRank)
 		throw Bureaucrat::GradeTooHighException();
-	else if (this->_grade > LowestRank)
+	else if (grade > LowestRank)
 		throw Bureaucrat::GradeTooLowException();
-	return ;
+	else
+		this->_grade = grade;
 }
 
 ostream	& operator<<(ostream &o, Bureaucrat const & rhs)

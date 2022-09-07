@@ -6,22 +6,22 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 22:44:27 by steh              #+#    #+#             */
-/*   Updated: 2022/09/07 23:29:09 by steh             ###   ########.fr       */
+/*   Updated: 2022/09/08 01:28:03 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Forms.hpp"
 #include "Bureaucrats.hpp"
 
-#define HighestRank 1
-#define LowestRank 150
+// #define HighestRank 1
+// #define LowestRank 150
 
 bool Form::_verbose = false;
 
 Form::Form(void) : _name("null"),
 				_isSign(false),
-				_gradeToSign(LowestRank),
-				_gradeToExec(LowestRank)
+				_gradeToSign(Form::_lowestGrade),
+				_gradeToExec(Form::_lowestGrade)
 {
 	return ;
 }
@@ -31,6 +31,20 @@ Form::Form(Form const & src) : _name(src.getName()),
 					_gradeToSign(src.getSignGrade()),
 					_gradeToExec(src.getSignExec())
 {
+	
+	return ;
+}
+
+Form::Form(const string & name, int _gradeToSign, int _gradeToExec) :
+				_name(name),
+				_gradeToSign(_gradeToSign),
+				_gradeToExec(_gradeToExec)
+{
+	this->_isSign = false;
+	this->checkGrade();
+	cout << *this;
+	if (Form::_verbose)
+		cout << "Form paramter constructor" << endl;
 	return ;
 }
 
@@ -66,25 +80,57 @@ int		Form::getSignExec(void) const
 	return (this->_gradeToExec);
 }
 
-bool			Form::beSigned(Bureaucrat const & src)
+void	Form::beSigned(Bureaucrat const & src)
 {
-	(void)src;
-	return (false);
+	int	grade;
+
+	grade = src.getGrade();
+	if (grade > this->_gradeToSign)
+		throw (Form::GradeTooLowException());
+	
+	if (this->_isSign == true)
+		throw (Form::MultipleSignature());
+	else
+		this->_isSign = true;
 }
 
 const char* Form::GradeTooHighException::what() const throw()
 {
-	return ("Form Cannot get a grade < 1");
+	return ("grade too high");
 }
 
 const char* Form::GradeTooLowException::what() const throw()
 {
-	return ("Form Cannot get a grade > 150");
+	return ("grade too low");
 }
+
+const char* Form::MultipleSignature::what() const throw()
+{
+	return ("already signed");
+}
+
+void	Form::checkGrade( void ) const
+{
+	if (this->_gradeToSign < Form::_highestGrade
+			|| this->_gradeToExec < Form::_highestGrade)
+		throw (Form::GradeTooHighException());
+	else if (this->_gradeToSign > Form::_lowestGrade
+			|| this->_gradeToExec > Form::_lowestGrade)
+		throw (Form::GradeTooLowException());
+}
+
 
 ostream	& operator<<(ostream &o, Form const & rhs)
 {
-	(void)o;
-	(void)rhs;
+	bool	sign;
+
+	sign = rhs.getIsSign();
+
+	o << rhs.getName() 
+	<< " Form need grade " << rhs.getSignGrade()
+	<< " to sign and grade " << rhs.getSignExec()
+	<< " to execute. This form is "
+	<< (sign ? "signed" : "not sign")
+	<< endl;
 	return (o);
 }

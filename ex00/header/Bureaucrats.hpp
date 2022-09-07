@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 17:14:03 by steh              #+#    #+#             */
-/*   Updated: 2022/09/07 22:27:30 by steh             ###   ########.fr       */
+/*   Updated: 2022/09/08 01:26:10 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ class Bureaucrat
 		int				getGrade(void) const;
 		void			incrementGrade(int grade);
 		void			decrementGrade(int grade);
-		void			checkGrade( void ) const;
+		// void			checkGrade( void ) const;
+		void			setGrade(int grade);
 
 		class GradeTooHighException : public exception
 		{

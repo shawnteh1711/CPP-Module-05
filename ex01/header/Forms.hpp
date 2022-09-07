@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 22:03:16 by steh              #+#    #+#             */
-/*   Updated: 2022/09/07 23:07:39 by steh             ###   ########.fr       */
+/*   Updated: 2022/09/08 01:01:55 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,12 @@ class Form
 		const int		_gradeToExec;
 		static bool 	_verbose;
 
+		static const int	_lowestGrade = 150;
+		static const int	_highestGrade = 1;
+
 	public:
 		Form(void);
+		Form(const string & name, int _gradeToSign, int _gradeToExec);
 		Form(Form const & src);
 		Form & operator=(Form const & rhs);
 		~Form(void);
@@ -41,7 +45,9 @@ class Form
 		bool			getIsSign(void) const;
 		int				getSignGrade(void) const;
 		int				getSignExec(void) const;
-		bool			beSigned(Bureaucrat const & src);
+		void			beSigned(Bureaucrat const & src);
+		void			checkGrade( void ) const;
+
 
 		class GradeTooHighException : public exception
 		{
@@ -50,6 +56,12 @@ class Form
 		};
 		
 		class GradeTooLowException : public exception
+		{
+			public:
+					virtual const char* what() const throw();
+		};
+
+		class MultipleSignature : public exception
 		{
 			public:
 					virtual const char* what() const throw();
