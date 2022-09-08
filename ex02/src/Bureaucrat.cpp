@@ -6,16 +6,17 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 17:16:28 by steh              #+#    #+#             */
-/*   Updated: 2022/09/08 15:48:41 by steh             ###   ########.fr       */
+/*   Updated: 2022/09/08 01:28:19 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrats.hpp"
+#include "../header/Bureaucrats.hpp"
 
 #define HighestRank 1
 #define LowestRank 150
 
 using std::exception;
+using std::cerr;
 
 bool Bureaucrat::_verbose = false;
 
@@ -26,7 +27,7 @@ Bureaucrat::Bureaucrat(void) : _name("null"), _grade(LowestRank)
 	return ;
 }
 
-Bureaucrat::Bureaucrat(string name, int grade) : _name(name)
+Bureaucrat::Bureaucrat(string name, int grade) : _name(name), _grade(grade)
 {
 	if (Bureaucrat::_verbose)
 		cout << "Bureaucrat parameter constructor" << endl;
@@ -83,14 +84,12 @@ void			Bureaucrat::incrementGrade(int grade)
 
 	cpygrade = this->_grade - grade;
 	this->setGrade(cpygrade);
-	cout << *this;
 }
 
 void			Bureaucrat::decrementGrade(int grade)
 {
 	grade += this->_grade;
 	this->setGrade(grade);
-	cout << *this;
 }
 
 // void	Bureaucrat::checkGrade(void) const
@@ -118,4 +117,37 @@ ostream	& operator<<(ostream &o, Bureaucrat const & rhs)
 	o << rhs.getName()
 	<< " bureaucrat has grade " << rhs.getGrade() << endl;
 	return (o);
+}
+
+void	Bureaucrat::signForm(Form & src)
+{
+	try
+	{
+		src.beSigned(*this);
+		cout
+		<< this->_name
+		<< " Bureaucrat signed "
+		<< src.getName()
+		<< endl;
+	}
+	catch(Form::GradeTooLowException e)
+	{
+		cerr
+		<< this->_name
+		<< " Bureaucrat couldn't sign "
+		<< src.getName()
+		<< " because "
+		<< e.what()
+		<< endl;
+	}
+	catch(Form::MultipleSignature e)
+	{
+		cerr
+		<< this->_name
+		<< " Bureaucrat couldn't sign "
+		<< src.getName()
+		<< " because "
+		<< e.what()
+		<< endl;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 17:55:50 by steh              #+#    #+#             */
-/*   Updated: 2022/09/07 20:30:53 by steh             ###   ########.fr       */
+/*   Updated: 2022/09/08 15:55:02 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ using std::cerr;
 
 int main(void)
 {
+	// grade too high
 	{
 		try
 		{
@@ -28,6 +29,7 @@ int main(void)
 		}
 	}
 
+	// grade too low
 	{
 		try
 		{
@@ -40,8 +42,8 @@ int main(void)
 	}
 	
 	Bureaucrat a("a", 75);
-	cout << a;
 
+	// decrement grade more than 150
 	{
 		try
 		{
@@ -54,6 +56,7 @@ int main(void)
 	}
 	cout << a;
 
+	// increment grade less than 1
 	{
 		try
 		{
@@ -65,6 +68,8 @@ int main(void)
 		}
 	}
 
+
+	// successfully increment grade to 65
 	{
 		try
 		{
@@ -76,6 +81,7 @@ int main(void)
 		}
 	}
 
+	// successfully decrement grade to 85
 	{
 		try
 		{
@@ -87,5 +93,26 @@ int main(void)
 		}
 	}
 
+
+	// copy constructor
+	Bureaucrat copy;
+
+	copy = a;
+	
+	// Bureaucrat a increment back to 65
+	{
+		try
+		{
+			a.incrementGrade(20);
+		}
+		catch(const exception& e)
+		{
+			cerr << e.what() << endl;
+		}
+	}
+
+	// Bureaucrat copy still 85. operator overload
+	cout << copy;
+	
 	return (0);
 }
