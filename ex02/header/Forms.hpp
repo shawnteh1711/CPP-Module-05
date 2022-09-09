@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 22:03:16 by steh              #+#    #+#             */
-/*   Updated: 2022/09/08 16:53:24 by steh             ###   ########.fr       */
+/*   Updated: 2022/09/09 15:01:17 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ class Form
 {
 	private:
 		const string	_name;
+		const string	_target;
 		bool			_isSign;
 		const int		_gradeToSign;
 		const int		_gradeToExec;
@@ -36,15 +37,18 @@ class Form
 
 	public:
 		Form(void);
-		Form(const string & name, int _gradeToSign, int _gradeToExec);
+		Form(const string & name, const string & target, bool isSign, int _gradeToSign, int _gradeToExec);
 		Form(Form const & src);
 		Form & operator=(Form const & rhs);
 		~Form(void);
 
 		const string	getName(void) const;
+		void			setName(const string & name);
+		const string	getTarget(void) const;
+		void			setTarget(const string & target);
 		bool			getIsSign(void) const;
-		int				getSignGrade(void) const;
-		int				getSignExec(void) const;
+		int				getGradeSign(void) const;
+		int				getGradeExec(void) const;
 		void			beSigned(Bureaucrat const & src);
 		void			checkGrade( void ) const;
 
@@ -62,6 +66,12 @@ class Form
 		};
 
 		class MultipleSignature : public exception
+		{
+			public:
+					virtual const char* what() const throw();
+		};
+
+		class UnsignedFormToExecute : public exception
 		{
 			public:
 					virtual const char* what() const throw();

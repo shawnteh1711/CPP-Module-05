@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:49:40 by steh              #+#    #+#             */
-/*   Updated: 2022/09/08 16:54:15 by steh             ###   ########.fr       */
+/*   Updated: 2022/09/09 12:40:30 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,5 @@ class ShubberyCreationForm : public Form
 
 		void execute(Bureaucrat const & executor) const;
 	};
-
-ShubberyCreationForm::ShubberyCreationForm(/* args */)
-{
-}
-
-ShubberyCreationForm::~ShubberyCreationForm()
-{
-}
-
-
-
 
 #endif

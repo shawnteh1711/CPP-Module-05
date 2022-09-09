@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 17:16:28 by steh              #+#    #+#             */
-/*   Updated: 2022/09/08 01:28:19 by steh             ###   ########.fr       */
+/*   Updated: 2022/09/09 13:37:54 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void	Bureaucrat::signForm(Form & src)
 		<< src.getName()
 		<< endl;
 	}
-	catch(Form::GradeTooLowException e)
+	catch(Form::GradeTooLowException & e)
 	{
 		cerr
 		<< this->_name
@@ -140,7 +140,7 @@ void	Bureaucrat::signForm(Form & src)
 		<< e.what()
 		<< endl;
 	}
-	catch(Form::MultipleSignature e)
+	catch(Form::MultipleSignature & e)
 	{
 		cerr
 		<< this->_name
@@ -151,3 +151,37 @@ void	Bureaucrat::signForm(Form & src)
 		<< endl;
 	}
 }
+
+void	Bureaucrat::executeForm(Form const & src)
+{
+	try
+	{
+		src.execute(*this);
+		cout
+		<< this->_name
+		<< " Bureaucrat execute "
+		<< src.getName()
+		<< endl;
+	}
+	catch(Form::UnsignedFormToExecute & e)
+	{
+		cerr
+		<< this->_name
+		<< " Bureaucrat couldn't execute "
+		<< src.getName()
+		<< " because "
+		<< e.what()
+		<< endl;
+	}
+	catch(Form::GradeTooLowException & e)
+	{
+		cerr
+		<< this->_name
+		<< " Bureaucrat couldn't execute "
+		<< src.getName()
+		<< " because "
+		<< e.what()
+		<< endl;
+	}
+}
+
