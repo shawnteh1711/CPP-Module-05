@@ -1,0 +1,7 @@
+**/obj
+**/obj/*
+**/obj/*.o
+**/obj/*.d
+**/*.exe
+**/program
+**/**/*_shrubbery
