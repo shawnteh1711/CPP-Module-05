@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:37:47 by steh              #+#    #+#             */
-/*   Updated: 2022/09/09 20:05:31 by steh             ###   ########.fr       */
+/*   Updated: 2022/09/20 11:17:25 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ int main(void)
 				cout << "Bye" << endl;
 				break ;
 			}
-			else
-			{
-				std::cout << "Option not found" << std::endl;
-				std::cin.clear();
-				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-				continue ;
-			}
+		}
+		else
+		{
+			std::cout << "Option not found" << std::endl;
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			continue ;
 		}
 	}
 	// system("leaks program");
@@ -160,17 +160,17 @@ void	test3(Bureaucrat & a, Bureaucrat & b, Intern & intern)
 
 	Form*	RobotomyFormAIntern2[10] = 
 	{
-		intern.makeForm("Robotomy Request", "0"),
-		intern.makeForm("Robotomy Request", "1"),
-		intern.makeForm("Robotomy Request", "2"),
-		intern.makeForm("Robotomy Request", "3"),
-		intern.makeForm("Robotomy Request", "4"),
-		intern.makeForm("Robotomy Request", "5"),
-		intern.makeForm("Robotomy Request", "6"),
-		intern.makeForm("Robotomy Request", "7"),
-		intern.makeForm("Robotomy Request", "8"),
-		intern.makeForm("Robotomy Request", "9")
-	};
+		intern.makeForm("Robotomy Request", "ROBO 0"),
+		intern.makeForm("Robotomy Request", "ROBO 1"),
+		intern.makeForm("Robotomy Request", "ROBO 2"),
+		intern.makeForm("Robotomy Request", "ROBO 3"),
+		intern.makeForm("Robotomy Request", "ROBO 4"),
+		intern.makeForm("Robotomy Request", "ROBO 5"),
+		intern.makeForm("Robotomy Request", "ROBO 6"),
+		intern.makeForm("Robotomy Request", "ROBO 7"),
+		intern.makeForm("Robotomy Request", "ROBO 8"),
+		intern.makeForm("Robotomy Request", "ROBO 9")
+	}; 
 
 	for (size_t i = 0; i < 10; i++)
 	{

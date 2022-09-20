@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:37:47 by steh              #+#    #+#             */
-/*   Updated: 2022/09/09 15:04:50 by steh             ###   ########.fr       */
+/*   Updated: 2022/09/20 11:12:29 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int main(void)
 	Bureaucrat a = Bureaucrat("BeuracratA", 1);
 	Bureaucrat b = Bureaucrat("BeuracratB", 150);
 
-	// test1(a, b);
-	test2(a, b);
+	test1(a, b);
+	// test2(a, b);
 	// test3(a, b);
 	return (0);
 }

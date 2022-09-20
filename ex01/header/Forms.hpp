@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 22:03:16 by steh              #+#    #+#             */
-/*   Updated: 2022/09/08 01:01:55 by steh             ###   ########.fr       */
+/*   Updated: 2022/09/20 11:08:08 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ class Form
 		~Form(void);
 
 		const string	getName(void) const;
+		void			setName(const string & name);
 		bool			getIsSign(void) const;
 		int				getSignGrade(void) const;
 		int				getSignExec(void) const;

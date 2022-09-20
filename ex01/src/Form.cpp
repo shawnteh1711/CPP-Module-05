@@ -6,7 +6,7 @@
 /*   By: steh <steh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 22:44:27 by steh              #+#    #+#             */
-/*   Updated: 2022/09/08 01:28:03 by steh             ###   ########.fr       */
+/*   Updated: 2022/09/20 11:08:30 by steh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ Form::Form(const string & name, int _gradeToSign, int _gradeToExec) :
 Form & Form::operator=(Form const & rhs)
 {
 	this->_isSign = rhs.getIsSign();
+	this->setName(rhs.getName());
 	return (*this);
 }
 
@@ -59,6 +60,10 @@ Form::~Form(void)
 	return ;
 }
 
+void			Form::setName(const string & name)
+{
+	const_cast<string &>(this->_name) = name;
+}
 
 const string	Form::getName(void) const
 {
